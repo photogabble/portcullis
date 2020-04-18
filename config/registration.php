@@ -38,8 +38,8 @@ return [
    | before registration becomes closed automatically. You should have a
    | reasonable limit set based upon the following metrics:
    |
-   | - How many postcasts your server can serve
-   | - How much disk space you have available per podcast, including backups
+   | - How many widgets your server can serve
+   | - How much disk space you have available per widget, including backups
    | - How much facility you have for moderating your users, you should
    |   have at least one moderator per 100 users
    |
