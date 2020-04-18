@@ -4,6 +4,20 @@ return [
 
    /*
    |--------------------------------------------------------------------------
+   | Home Route
+   |--------------------------------------------------------------------------
+   |
+   | The path to the "home" route for your application. This is the default
+   | location to where the user is redirected upon successful login.
+   |
+   | NOTE: From laravel 7 this can be set to RouteServiceProvider::HOME
+   |
+   */
+
+   'home' => '/home',
+
+   /*
+   |--------------------------------------------------------------------------
    | Registration Open
    |--------------------------------------------------------------------------
    |

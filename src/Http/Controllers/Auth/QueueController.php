@@ -3,7 +3,7 @@
 namespace Photogabble\Portcullis\Http\Controllers\Auth;
 
 use Photogabble\Portcullis\Entities\RegistrationQueue;
-use App\Http\Controllers\Controller;
+use Photogabble\Portcullis\Http\Controllers\Controller;
 use Photogabble\Portcullis\Http\Requests\RegistrationQueueRequest;
 use Illuminate\Support\MessageBag;
 

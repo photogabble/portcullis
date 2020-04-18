@@ -7,7 +7,7 @@ use Photogabble\Portcullis\Observers\UserObserver;
 use Photogabble\Portcullis\Console\UserDelete;
 use Illuminate\Support\ServiceProvider;
 use Photogabble\Portcullis\Console\UserAdd;
-use App\User;
+use Photogabble\Portcullis\Entities\User;
 
 class PortcullisServiceProvider extends ServiceProvider
 {
@@ -34,7 +34,8 @@ class PortcullisServiceProvider extends ServiceProvider
             __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'registration.php' => config_path('registration.php'),
         ]);
 
-        $this->loadMigrationsFrom(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'migrations');
+        $this->loadMigrationsFrom(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR. 'migrations');
+        $this->loadFactoriesFrom(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR. 'factories');
 
         Route::middleware('web')
             ->namespace('Photogabble\Portcullis\Http\Controllers')

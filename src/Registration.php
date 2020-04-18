@@ -2,7 +2,7 @@
 
 namespace Photogabble\Portcullis;
 
-use App\User;
+use Photogabble\Portcullis\Entities\User;
 use Cache;
 use Exception;
 

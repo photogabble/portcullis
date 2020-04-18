@@ -2,9 +2,8 @@
 
 namespace Photogabble\Portcullis\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
+use Photogabble\Portcullis\Http\Controllers\Controller;
 
 class ConfirmPasswordController extends Controller
 {
@@ -26,7 +25,7 @@ class ConfirmPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo;
 
     /**
      * Create a new controller instance.
@@ -35,6 +34,7 @@ class ConfirmPasswordController extends Controller
      */
     public function __construct()
     {
+        $this->redirectTo = config('registration.home');
         $this->middleware('auth');
     }
 }

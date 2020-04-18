@@ -2,8 +2,8 @@
 
 namespace Photogabble\Portcullis\Observers;
 
-use App\User;
 use Cache;
+use Photogabble\Portcullis\Entities\User;
 
 class UserObserver
 {
