@@ -1,0 +1,52 @@
+{
+  "name": "photogabble/portcullis",
+  "type": "library",
+  "description": "Opinionated authentication and administration bundle used by various PhotoGabble projects.",
+  "keywords": [
+    "laravel",
+    "auth"
+  ],
+  "support": {
+    "issues": "https://github.com/photogabble/portcullis/issues",
+    "source": "https://github.com/photogabble/portcullis"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Simon Dann",
+      "email": "simon.dann@gmail.com",
+      "homepage": "https://www.photogabble.co.uk"
+    }
+  ],
+  "require": {
+    "php": "^7.2.5",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^5.1",
+    "phpunit/phpunit": "^9"
+  },
+  "autoload": {
+    "psr-4": {
+      "Photogabble\\Portcullis\\": "src/"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Photogabble\\Portcullis\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.3.0-dev"
+    },
+    "laravel": {
+      "providers": [
+        "Photogabble\\Portcullis\\PortcullisServiceProvider"
+      ]
+    }
+  }
+}
