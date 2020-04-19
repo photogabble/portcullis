@@ -1,14 +1,14 @@
 <?php
 
-namespace Photogabble\Portcullis\Tests;
+namespace Photogabble\Portcullis\Tests\Unit;
 
 use Photogabble\Portcullis\Registration;
 use Photogabble\Portcullis\Entities\User;
+use Photogabble\Portcullis\Tests\BootstrapTestCase;
 use Route;
-use Orchestra\Testbench\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class RegistrationQueueTest extends TestCase
+class RegistrationQueueTest extends BootstrapTestCase
 {
     use RefreshDatabase;
 
