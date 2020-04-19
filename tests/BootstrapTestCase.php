@@ -1,10 +1,9 @@
 <?php
 
-namespace Photogabble\Portcullis\Tests;
+namespace Tests;
 
 class BootstrapTestCase extends \Orchestra\Testbench\TestCase
 {
-
     /**
      * Informs Orchestra\Testbench that we we need these
      * Service Providers booting in order to test.
@@ -20,5 +19,4 @@ class BootstrapTestCase extends \Orchestra\Testbench\TestCase
             'Photogabble\Portcullis\PortcullisServiceProvider'
         ];
     }
-
 }

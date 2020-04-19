@@ -39,7 +39,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Photogabble\\Portcullis\\Tests\\": "tests/"
+      "Tests\\": "tests/"
     }
   },
   "extra": {

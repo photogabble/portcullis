@@ -1,25 +1,16 @@
 <?php
 
-namespace Photogabble\Portcullis\Tests\Unit;
+namespace Tests\Unit;
 
 use Photogabble\Portcullis\Registration;
 use Photogabble\Portcullis\Entities\User;
-use Photogabble\Portcullis\Tests\BootstrapTestCase;
+use Tests\BootstrapTestCase;
 use Route;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RegistrationQueueTest extends BootstrapTestCase
 {
     use RefreshDatabase;
-
-    protected function getPackageProviders($app)
-    {
-        return [
-            'Laravel\Ui\UiServiceProvider',
-            'Spatie\Activitylog\ActivitylogServiceProvider',
-            'Photogabble\Portcullis\PortcullisServiceProvider'
-        ];
-    }
 
     public function test_registration_open_by_default()
     {

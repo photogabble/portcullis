@@ -1,8 +1,8 @@
 <?php
 
-namespace Photogabble\Portcullis\Tests\Unit;
+namespace Tests\Feature;
 
-use Photogabble\Portcullis\Tests\BootstrapTestCase;
+use Tests\BootstrapTestCase;
 
 class RegistrationTest extends BootstrapTestCase
 {
