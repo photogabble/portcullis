@@ -10,13 +10,18 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
+    const ROLE_EVALUATOR = 'evaluator';
+    const ROLE_USER = 'user';
+    const ROLE_MODERATOR = 'moderator';
+    const ROLE_ADMIN = 'admin';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'name', 'email', 'password', 'role',
     ];
 
     /**

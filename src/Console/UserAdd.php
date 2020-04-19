@@ -2,7 +2,10 @@
 
 namespace Photogabble\Portcullis\Console;
 
+use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
+use Photogabble\Portcullis\Entities\User;
 
 class UserAdd extends Command
 {
@@ -11,7 +14,7 @@ class UserAdd extends Command
      *
      * @var string
      */
-    protected $signature = 'user:add';
+    protected $signature = 'user:add {username} {name?} {email?} {--role=} {--verified}';
 
     /**
      * The console command description.
@@ -33,10 +36,29 @@ class UserAdd extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
-        //
+        $password = Str::random(16);
+
+        $user = new User([
+            'username' => $this->argument('username'),
+            'name' => $this->argument('name') ?? 'anonymous',
+            'email' => $this->argument('email'),
+            'role' => $this->option('role') ?? User::ROLE_USER,
+            'password' => $password,
+        ]);
+
+        if ($this->option('verified')) {
+            $user->email_verified_at = Carbon::now();
+        }
+
+        if ($user->save()) {
+            $this->line('New user created with password <info>'. $password .'</info>');
+            return 0;
+        }
+
+        return 1;
     }
 }

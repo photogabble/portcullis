@@ -16,7 +16,7 @@ class BootstrapTestCase extends \Orchestra\Testbench\TestCase
         return [
             'Laravel\Ui\UiServiceProvider',
             'Spatie\Activitylog\ActivitylogServiceProvider',
-            'Photogabble\Portcullis\PortcullisServiceProvider'
+            'Photogabble\Portcullis\PortcullisServiceProvider',
         ];
     }
 }
