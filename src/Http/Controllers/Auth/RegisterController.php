@@ -7,6 +7,7 @@ use Photogabble\Portcullis\Entities\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Photogabble\Portcullis\Http\Middleware\CheckRegistrationAllowed;
 
 class RegisterController extends Controller
 {
@@ -39,6 +40,7 @@ class RegisterController extends Controller
     {
         $this->redirectTo = config('registration.home');
         $this->middleware('guest');
+        $this->middleware(CheckRegistrationAllowed::class);
     }
 
     /**

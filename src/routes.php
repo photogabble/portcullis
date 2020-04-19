@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Authentication Routes
@@ -7,7 +10,7 @@
 | ...
 |
 */
-Auth::routes(['verify' => true, 'register' => registration()->isOpen()]);
+Auth::routes(['verify' => true]);
 
 /*
 |--------------------------------------------------------------------------
