@@ -16,15 +16,21 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('inviter_id')->nullable()->default(null);
+
+            $table->timestamps();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('delete_after')->nullable();
+            $table->timestamp('disabled_on')->nullable();
+
+            $table->string('locale')->default(config('app.locale'));
+            $table->string('profile_photo_url')->nullable()->default(null);
+
             $table->string('display_name');
             $table->string('username')->unique();
             $table->string('email')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->timestamp('delete_after')->nullable();
             $table->enum('role',  ['evaluator', 'user', 'moderator', 'admin'])->default('evaluator');
             $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
 
             $table->foreign('inviter_id')->references('id')->on('users');
         });
