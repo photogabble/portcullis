@@ -9,7 +9,7 @@ use Photogabble\Portcullis\Entities\User;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'display_name' => $faker->name,
         'username' => $faker->unique()->userName,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),

@@ -15,7 +15,7 @@ class AddUserCommandTest extends BootstrapTestCase
     {
         // Test add user with email address
         $this->artisan('user:add', ['username' => 'demo', 'email' => 'demo@example.com'])->assertExitCode(0);
-        $this->assertDatabaseHas('users', ['username' => 'demo', 'name' => 'anonymous', 'email' => 'demo@example.com', 'role' => 'user']);
+        $this->assertDatabaseHas('users', ['username' => 'demo', 'display_name' => 'anonymous', 'email' => 'demo@example.com', 'role' => 'user']);
 
         // Test add user with email address verified flag set
         $this->artisan('user:add', ['username' => 'demo1', 'email' => 'demo@example.com', '--verified' => true])->assertExitCode(0);
@@ -24,7 +24,7 @@ class AddUserCommandTest extends BootstrapTestCase
 
         // Test add user without email address
         $this->artisan('user:add', ['username' => 'demo2'])->assertExitCode(0);
-        $this->assertDatabaseHas('users', ['username' => 'demo2', 'name' => 'anonymous', 'email' => null]);
+        $this->assertDatabaseHas('users', ['username' => 'demo2', 'display_name' => 'anonymous', 'email' => null]);
 
         // Test adding user with defined role
         $this->artisan('user:add', ['username' => 'demo3', '--role' => 'admin'])->assertExitCode(0);

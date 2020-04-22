@@ -8,5 +8,5 @@ class RegistrationQueue extends Model
 {
     protected $table = 'registration_queue';
 
-    protected $fillable = ['name', 'email', 'is_supporter'];
+    protected $fillable = ['display_name', 'email', 'is_supporter'];
 }

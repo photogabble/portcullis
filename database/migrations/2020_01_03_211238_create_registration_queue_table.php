@@ -17,7 +17,7 @@ class CreateRegistrationQueueTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
 
-            $table->string('name');
+            $table->string('display_name');
             $table->string('email')->unique();
             $table->boolean('is_supporter');
         });

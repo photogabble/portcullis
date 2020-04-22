@@ -2,7 +2,7 @@
 
 namespace Photogabble\Portcullis\Http\Requests;
 
-use Photogabble\Portcullis\RegistrationQueue;
+use Photogabble\Portcullis\Entities\RegistrationQueue;
 use Illuminate\Support\MessageBag;
 
 class RegistrationQueueRequest extends AbstractBaseRequest
@@ -25,7 +25,7 @@ class RegistrationQueueRequest extends AbstractBaseRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:255'],
+            'display_name' => ['required', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:registration_queue'],
         ];
     }
@@ -47,7 +47,7 @@ class RegistrationQueueRequest extends AbstractBaseRequest
     public function persist(MessageBag $messageBag = null): bool
     {
         $model = $this->model();
-        $model->name = $this->get('name');
+        $model->display_name = $this->get('display_name');
         $model->email = $this->get('email');
         $model->is_supporter = (bool) $this->get('is_supporter', false);
         return $model->save();

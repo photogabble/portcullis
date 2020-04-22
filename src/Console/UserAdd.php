@@ -14,7 +14,7 @@ class UserAdd extends Command
      *
      * @var string
      */
-    protected $signature = 'user:add {username} {name?} {email?} {--role=} {--verified}';
+    protected $signature = 'user:add {username} {display_name?} {email?} {--role=} {--verified}';
 
     /**
      * The console command description.
@@ -44,7 +44,7 @@ class UserAdd extends Command
 
         $user = new User([
             'username' => $this->argument('username'),
-            'name' => $this->argument('name') ?? 'anonymous',
+            'display_name' => $this->argument('display_name') ?? 'anonymous',
             'email' => $this->argument('email'),
             'role' => $this->option('role') ?? User::ROLE_USER,
             'password' => $password,
