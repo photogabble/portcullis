@@ -2,10 +2,11 @@
 
 namespace Photogabble\Portcullis\Http\Controllers\Auth;
 
+use Closure;
+use Exception;
 use Photogabble\Portcullis\Http\Controllers\Controller;
 use Photogabble\Portcullis\Entities\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Photogabble\Portcullis\Http\Middleware\CheckRegistrationAllowed;
 
@@ -51,25 +52,25 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'display_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        return Validator::make($data, config('registration.validation', []));
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Photogabble\Portcullis\Entities\User
+     * @throws Exception
      */
     protected function create(array $data)
     {
-        return User::create([
-            'display_name' => $data['display_name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        /** @var Closure $mapper */
+        $mapper = config('registration.attributes', function(array $data){ return [];});
+
+        if (! $mapper instanceof Closure) {
+            throw new Exception('Config key [registration.attributes] must be an instance of Closure.');
+        }
+
+        return User::create($mapper($data));
     }
 }
