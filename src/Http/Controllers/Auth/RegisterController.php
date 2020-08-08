@@ -4,7 +4,9 @@ namespace Photogabble\Portcullis\Http\Controllers\Auth;
 
 use Closure;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Photogabble\Portcullis\Http\Controllers\Controller;
 use Photogabble\Portcullis\Entities\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -41,7 +43,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->redirectTo = config('registration.home');
-        $this->middleware('guest');
+        $this->middleware('guest')->except(['passwordConfirm']);
         $this->middleware(CheckRegistrationAllowed::class);
     }
 
@@ -73,6 +75,27 @@ class RegisterController extends Controller
         }
 
         return User::create($mapper($data));
+    }
+
+    /**
+     * @param Request $request
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function passwordConfirm(Request $request)
+    {
+        /** @var User $user */
+        $user = $request->user();
+        $this->validate($request, [
+            'password' => [
+                'required',
+                function ($attribute, $value, $fail) use ($user) {
+                    if (! Hash::check($value, $user->password)){
+                        $fail($attribute . 'does not match the password set');
+                    }
+                }
+            ]
+        ]);
+        return redirect($this->redirectTo);
     }
 
     /**
