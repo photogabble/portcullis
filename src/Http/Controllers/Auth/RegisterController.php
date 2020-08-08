@@ -4,6 +4,7 @@ namespace Photogabble\Portcullis\Http\Controllers\Auth;
 
 use Closure;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Photogabble\Portcullis\Http\Controllers\Controller;
 use Photogabble\Portcullis\Entities\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -72,5 +73,17 @@ class RegisterController extends Controller
         }
 
         return User::create($mapper($data));
+    }
+
+    /**
+     * If created accounts have no email associated with them then we need to double check
+     * their password (as as password confirmation).
+     */
+    public function redirectTo(): string
+    {
+        /** @var User $user */
+        $user = Auth::user();
+
+        return is_null($user->email) ? route('register.password-confirm') : $this->redirectTo;
     }
 }

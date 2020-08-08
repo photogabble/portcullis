@@ -93,8 +93,8 @@ return [
     'validation' => [
         'display_name' => ['required', 'string', 'max:255'],
         'username' => ['required', 'string', 'max:255', 'unique:users'],
-        'email' => ['sometimes', 'string', 'email', 'max:255'],
-        'password' => ['required', 'string', 'min:8', 'confirmed'],
+        'email' => ['nullable', 'string', 'email', 'max:255'],
+        'password' => ['required', 'string', 'min:8'],
     ],
 
     /*
