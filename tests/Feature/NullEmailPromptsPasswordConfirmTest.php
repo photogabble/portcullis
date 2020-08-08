@@ -15,9 +15,17 @@ class NullEmailPromptsPasswordConfirmTest extends BootstrapTestCase
      * their password. For users whom have registered with an email we don't need to do
      * this as they will be able to reset their password via email.
      */
-    public function test_registering_with_no_email_redirects_to_password_confirm()
+    public function test_registering_with_null_email_redirects_to_password_confirm()
     {
         $response = $this->post(route('register'), factory(User::class)->raw(['email' => null, 'password' => 'password']));
+        $response->assertRedirect(route('register.password-confirm'));
+
+        $this->assertAuthenticated();
+    }
+
+    public function test_registering_with_empty_email_redirects_to_password_confirm()
+    {
+        $response = $this->post(route('register'), factory(User::class)->raw(['email' => '', 'password' => 'password']));
         $response->assertRedirect(route('register.password-confirm'));
 
         $this->assertAuthenticated();
