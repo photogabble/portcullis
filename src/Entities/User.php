@@ -72,4 +72,18 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(User::class, 'inviter_id');
     }
+
+    /**
+     * Because we can have empty email addresses for anonymous authentication
+     * this method returns true in the case of the email being empty.
+     *
+     * @return bool
+     */
+    public function hasVerifiedEmail(): bool
+    {
+        if (empty($this->email)) {
+            return true;
+        }
+        return ! is_null($this->email_verified_at);
+    }
 }
