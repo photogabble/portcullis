@@ -31,13 +31,18 @@ class AddUserCommandTest extends BootstrapTestCase
         $this->assertDatabaseHas('users', ['username' => 'demo3', 'role' => 'admin', 'email' => null]);
     }
 
-    public function test_add_user_validates_input()
+    public function test_add_user_requires_username()
     {
-        // username is required and must be unique
+        // username is required
         $this->expectException(RuntimeException::class);
         $this->artisan('user:add', ['email' => 'demo@example.com'])->assertExitCode(0);
+    }
 
+    public function test_add_user_validates_input()
+    {
+        // username must be unique
         $this->artisan('user:add', ['username' => 'demo'])->assertExitCode(0);
         $this->artisan('user:add', ['username' => 'demo'])->assertExitCode(1);
+
     }
 }
