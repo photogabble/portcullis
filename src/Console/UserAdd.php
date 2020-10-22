@@ -5,6 +5,7 @@ namespace Photogabble\Portcullis\Console;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Photogabble\Portcullis\Entities\User;
 
@@ -43,13 +44,24 @@ class UserAdd extends Command
     {
         $password = Str::random(16);
 
-        $user = new User([
+        $data = [
             'username' => $this->argument('username'),
             'display_name' => $this->argument('display_name') ?? 'anonymous',
             'email' => $this->argument('email'),
             'role' => $this->option('role') ?? User::ROLE_USER,
             'password' => Hash::make($password),
-        ]);
+        ];
+
+        $validator = Validator::make($data, config('registration.validation', []));
+
+        if ($validator->fails()) {
+            foreach ($validator->messages() as $message) {
+                $this->line('<error>[!]</error> '. $message);
+            }
+            return 1;
+        }
+
+        $user = new User($data);
 
         if ($this->option('verified')) {
             $user->email_verified_at = Carbon::now();
