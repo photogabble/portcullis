@@ -4,6 +4,7 @@ namespace Photogabble\Portcullis\Console;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Photogabble\Portcullis\Entities\User;
 
@@ -47,7 +48,7 @@ class UserAdd extends Command
             'display_name' => $this->argument('display_name') ?? 'anonymous',
             'email' => $this->argument('email'),
             'role' => $this->option('role') ?? User::ROLE_USER,
-            'password' => $password,
+            'password' => Hash::make($password),
         ]);
 
         if ($this->option('verified')) {

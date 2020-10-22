@@ -68,13 +68,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'delete_after' => 'datetime',
     ];
-
-    /**
-     * Hash Password on save
-     */
-    public function setPasswordAttribute($pass){
-        $this->attributes['password'] = Hash::make($pass);
-    }
     
     public function inviter(): ?BelongsTo
     {
